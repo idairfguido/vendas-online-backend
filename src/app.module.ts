@@ -10,6 +10,12 @@ import { createTableAddress1675388996374 } from './migration/1676518789581-creat
 import { alterTableState1675458729381 } from './migration/1676588667751-alter-table-state';
 import { insertInState1675458748572 } from './migration/1676588695806-insert-in-state';
 import { insertInCity1675458752231 } from './migration/1676588712477-insert-in-city';
+import { StateModule } from './state/state.module';
+import { CityModule } from './city/city.module';
+import { AddressModule } from './address/address.module';
+import { StateEntity } from './state/entities/state.entity';
+import { CityEntity } from './city/entities/city.entity';
+import { AddressEntity } from './address/entities/address.entity';
 
 @Module({
   imports: [
@@ -23,7 +29,7 @@ import { insertInCity1675458752231 } from './migration/1676588712477-insert-in-c
       password: process.env.DB_PASSWORD,
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
-      entities: [UserEntity],
+      entities: [UserEntity, StateEntity, CityEntity, AddressEntity],
       migrations: [
         createTableUser1675388649812,
         createTableState1675388988978,
@@ -36,6 +42,9 @@ import { insertInCity1675458752231 } from './migration/1676588712477-insert-in-c
       migrationsRun: true,
     }),
     UserModule,
+    StateModule,
+    CityModule,
+    AddressModule,
   ],
   controllers: [],
   providers: [],
