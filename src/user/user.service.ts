@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcryptjs';
 import { Repository } from 'typeorm';
-import { CreateUserDTO } from './dtos/createUser.dto';
+import { CreateUserDto } from './dtos/createUser.dto';
 import { UserEntity } from './entities/user.entity';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async createUser(createUserDTO: CreateUserDTO): Promise<UserEntity> {
+  async createUser(createUserDTO: CreateUserDto): Promise<UserEntity> {
     const saltOrRounds = 10;
     const passwordHashed = await hash(createUserDTO.phone, saltOrRounds);
 
@@ -38,5 +38,14 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async getUserByIdUsingRelations(userId: number): Promise<UserEntity> {
+    return this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+      relations: ['addresses'],
+    });
   }
 }
