@@ -16,7 +16,7 @@ export class AuthService {
     const isMatch = await compare(loginDto.password, user?.password || '');
 
     if (!user || !isMatch) {
-      throw new NotFoundException('Email or passord invalid');
+      throw new NotFoundException('Email or password invalid');
     }
 
     return user;
