@@ -12,12 +12,12 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async createUser(createUserDTO: CreateUserDto): Promise<UserEntity> {
+  async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     const saltOrRounds = 10;
-    const passwordHashed = await hash(createUserDTO.phone, saltOrRounds);
+    const passwordHashed = await hash(createUserDto.phone, saltOrRounds);
 
     return this.userRepository.save({
-      ...createUserDTO,
+      ...createUserDto,
       typeUser: 1,
       password: passwordHashed,
     });
@@ -45,7 +45,13 @@ export class UserService {
       where: {
         id: userId,
       },
-      relations: ['addresses'],
+      relations: {
+        addresses: {
+          city: {
+            state: true,
+          },
+        },
+      },
     });
   }
 }
