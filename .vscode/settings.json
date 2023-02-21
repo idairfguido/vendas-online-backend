@@ -7,5 +7,5 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["dtos", "nestjs", "rowid", "typeorm"]
+  "cSpell.words": ["dtos", "nestjs", "registred", "rowid", "typeorm"]
 }
