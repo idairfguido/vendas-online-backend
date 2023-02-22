@@ -5,7 +5,6 @@ import { ProductEntity } from './entities/product.entity';
 import { CategoryService } from '../category/category.service';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { UpdateProductDto } from './dtos/update-product.dto';
-import { runInThisContext } from 'vm';
 
 @Injectable()
 export class ProductService {
