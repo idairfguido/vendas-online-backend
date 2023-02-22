@@ -1,6 +1,6 @@
 import { CategoryEntity } from '../entities/category.entity';
 
-export class ReturnCategory {
+export class ReturnCategoryDto {
   id: number;
   name: string;
 
