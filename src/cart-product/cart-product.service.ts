@@ -3,19 +3,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { InsertCartDto } from '../cart/dtos/insert-cart.dto';
 import { CartEntity } from '../cart/entities/cart.entity';
 import { Repository } from 'typeorm';
-import { CartProdutEntity } from './entities/cart-product.entity';
+import { CartProductEntity } from './entities/cart-product.entity';
+import { ProductService } from '../product/product.service';
 
 @Injectable()
 export class CartProductService {
     constructor(
-        @InjectRepository(CartProdutEntity)
-        private readonly cartProductRepository: Repository<CartProdutEntity>,
+        @InjectRepository(CartProductEntity)
+        private readonly cartProductRepository: Repository<CartProductEntity>,
+        private readonly productService: ProductService,
     ) { }
 
     async verifyProductInCart(
         productId: number,
         cartId: number,
-    ): Promise<CartProdutEntity> {
+    ): Promise<CartProductEntity> {
         const cartProduct = await this.cartProductRepository.findOne({
             where: {
                 productId,
@@ -33,7 +35,7 @@ export class CartProductService {
     async createProductInCart(
         insertCartDto: InsertCartDto,
         cartId: number,
-    ): Promise<CartProdutEntity> {
+    ): Promise<CartProductEntity> {
         return this.cartProductRepository.save({
             amount: insertCartDto.amount,
             productId: insertCartDto.productId,
@@ -44,7 +46,9 @@ export class CartProductService {
     async insertProductInCart(
         insertCartDto: InsertCartDto,
         cart: CartEntity,
-    ): Promise<CartProdutEntity> {
+    ): Promise<CartProductEntity> {
+        await this.productService.findProductById(insertCartDto.productId);
+
         const cartProduct = await this.verifyProductInCart(
             insertCartDto.productId,
             cart.id,
