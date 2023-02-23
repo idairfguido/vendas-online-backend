@@ -3,5 +3,5 @@ import { LoginDto } from '../dtos/login.dto';
 
 export const loginUserMock: LoginDto = {
   email: userEntityMock.email,
-  password: 'c123456*',
+  password: 'abc',
 };

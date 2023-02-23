@@ -7,7 +7,7 @@ export const userEntityMock: UserEntity = {
   email: 'test@guido.com',
   id: 43242,
   name: 'nameMock',
-  password: '$2b$10$ti4/KHWyMycPtqej7i3c9.L9zLZRtI3RxfjGL0iynqHKmrynDsvX.',
+  password: '$2b$10$S62WmVpIxL52Z.0y22DWfuaAz8.XUNESChWP.AlMFZnOJ9n9uiqi.',
   phone: '321532523532',
   typeUser: UserType.User,
   updatedAt: new Date(),
