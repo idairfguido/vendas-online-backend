@@ -4,9 +4,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { hash } from 'bcrypt';
+import { createPasswordHashed, validatePassword } from '../utils/password';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/createUser.dto';
+import { UpdatePasswordDto } from './dtos/update-password.dto';
 import { UserEntity } from './entities/user.entity';
 import { UserType } from './enum/user-type.enum';
 
@@ -24,8 +25,8 @@ export class UserService {
     if (user) {
       throw new BadRequestException('email registered in system');
     }
-    const saltOrRounds = 10;
-    const passwordHashed = await hash(createUserDto.password, saltOrRounds);
+ 
+    const passwordHashed = await createPasswordHashed(createUserDto.password);
 
     return this.userRepository.save({
       ...createUserDto,
@@ -78,5 +79,22 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async updatePasswordUser(updatePasswordDto: UpdatePasswordDto, userId: number,):Promise<UserEntity>{
+    const user = await this.findUserById(userId);
+
+    const passwordHashed = await createPasswordHashed(updatePasswordDto.newPassword,);
+
+    const isMatch = await validatePassword(updatePasswordDto.lastPassword, user.password || '');
+
+    if(!isMatch){
+      throw new BadRequestException('Last password invalid');
+    }
+
+    return this.userRepository.save({
+      ...user,
+      password: passwordHashed,
+    });
   }
 }
