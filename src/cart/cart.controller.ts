@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { DeleteResult } from 'typeorm';
 import { Roles } from '../decorators/roles.decorator';
 import { UserId } from '../decorators/user-id.decorator';
@@ -6,6 +6,7 @@ import { UserType } from '../user/enum/user-type.enum';
 import { CartService } from './cart.service';
 import { InsertCartDto } from './dtos/insert-cart.dto';
 import { ReturnCartDto } from './dtos/return-cart.dto';
+import { UpdateCartDto } from './dtos/update-cart.dto';
 
 @Roles(UserType.User, UserType.Admin)
 @Controller('cart')
@@ -36,5 +37,24 @@ export class CartController {
     @Delete()
     async clearCart(@UserId() userId: number): Promise<DeleteResult> {
         return this.cartService.clearCart(userId);
+    }
+
+    @Delete('/product/:productId')
+    async deleteProductCart(
+        @Param('productId') productId: number,
+        @UserId() userId: number,
+    ): Promise<DeleteResult> {
+        return this.cartService.deleteProductCart(productId, userId);
+    }
+
+    @UsePipes(ValidationPipe)
+    @Patch()
+    async updateProductInCart(
+        @Body() updateCartDto: UpdateCartDto,
+        @UserId() userId: number,
+    ): Promise<ReturnCartDto> {
+        return new ReturnCartDto(
+            await this.cartService.updateProductInCart(updateCartDto, userId),
+        );
     }
 }
