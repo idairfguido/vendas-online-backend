@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, MetadataWithSuchNameAlreadyExistsError, Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateAddressDto } from './dtos/createAddress.dto';
 import { AddressEntity } from './entities/address.entity';
 import { UserService } from '../user/user.service';
@@ -47,8 +48,14 @@ export class AddressService {
     return addresses;
   }
 
-  async deleteAddress(addressId: number, userId: number,): Promise<DeleteResult> {
-    const result = (await this.addressRepository.delete({ userId, id: addressId }));
+  async deleteAddress(
+    addressId: number,
+    userId: number,
+  ): Promise<DeleteResult> {
+    const result = await this.addressRepository.delete({
+      userId,
+      id: addressId,
+    });
 
     if (result.affected < 1) {
       throw new NotFoundException(`Address not found for id: ${addressId}`);
@@ -56,5 +63,4 @@ export class AddressService {
 
     return result;
   }
-
 }

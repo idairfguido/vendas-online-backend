@@ -1,19 +1,14 @@
 {
-    "editor.codeActionsOnSave": {
-      "source.fixAll": true
-    },
-    "files.eol": "\n",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "cSpell.words": [
-      "dtos",
-      "nestjs",
-      "rowid",
-      "typeorm"
-    ],
-    "[typescript]": {
-      "editor.defaultFormatter": "vscode.typescript-language-features"
-    }
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false
+  },
+  "files.eol": "\n",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": ["dtos", "nestjs", "rowid", "typeorm"],
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   }
+}
