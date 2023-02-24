@@ -1,11 +1,14 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
 import { Roles } from '../decorators/roles.decorator';
 import { UserId } from '../decorators/user-id.decorator';
 import { UserType } from '../user/enum/user-type.enum';
@@ -13,10 +16,11 @@ import { AddressService } from './address.service';
 import { CreateAddressDto } from './dtos/createAddress.dto';
 import { ReturnAddressDto } from './dtos/returnAddress.dto';
 import { AddressEntity } from './entities/address.entity';
+
 @Roles(UserType.User, UserType.Admin)
 @Controller('address')
 export class AddressController {
-  constructor(private readonly addressService: AddressService) {}
+  constructor(private readonly addressService: AddressService) { }
 
   @Post()
   @UsePipes(ValidationPipe)
@@ -34,5 +38,13 @@ export class AddressController {
     return (await this.addressService.findAddressByUserId(userId)).map(
       (address) => new ReturnAddressDto(address),
     );
+  }
+
+  @Delete('/:addressId')
+  async deleteAddress(
+    @UserId() userId: number,
+    @Param('addressId') addressId: number,
+  ): Promise<DeleteResult> {
+    return await this.addressService.deleteAddress(addressId, userId);
   }
 }
