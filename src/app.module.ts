@@ -14,6 +14,9 @@ import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { CartModule } from './cart/cart.module';
 import { CartProductModule } from './cart-product/cart-product.module';
+import { PaymentStatusModule } from './payment-status/payment-status.module';
+import { PaymentService } from './payment/payment.service';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -42,6 +45,8 @@ import { CartProductModule } from './cart-product/cart-product.module';
     ProductModule,
     CartModule,
     CartProductModule,
+    PaymentStatusModule,
+    PaymentModule,
   ],
   controllers: [],
   providers: [
@@ -49,6 +54,7 @@ import { CartProductModule } from './cart-product/cart-product.module';
       provide: APP_GUARD,
       useClass: RolesGuard,
     },
+    PaymentService,
   ],
 })
-export class AppModule {}
+export class AppModule { }
