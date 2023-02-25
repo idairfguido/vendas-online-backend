@@ -1,7 +1,8 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll.eslint": true
   },
+  "eslint.validate": ["javascript"],
   "files.eol": "\n",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
