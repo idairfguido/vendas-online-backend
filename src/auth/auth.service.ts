@@ -13,15 +13,18 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async login(loginDto: LoginDto): Promise<ReturnLogin> {
     const user: UserEntity | undefined = await this.userService
       .findUserByEmail(loginDto.email)
       .catch(() => undefined);
 
-    const isMatch = await validatePassword(loginDto.password, user?.password || '');
-    
+    const isMatch = await validatePassword(
+      loginDto.password,
+      user?.password || '',
+    );
+
     if (!user || !isMatch) {
       throw new NotFoundException('Email or password invalid');
     }

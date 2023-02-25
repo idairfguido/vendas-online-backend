@@ -16,7 +16,7 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  ) { }
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     const user = await this.findUserByEmail(createUserDto.email).catch(
@@ -25,7 +25,7 @@ export class UserService {
     if (user) {
       throw new BadRequestException('email registered in system');
     }
- 
+
     const passwordHashed = await createPasswordHashed(createUserDto.password);
 
     return this.userRepository.save({
@@ -81,14 +81,22 @@ export class UserService {
     return user;
   }
 
-  async updatePasswordUser(updatePasswordDto: UpdatePasswordDto, userId: number,):Promise<UserEntity>{
+  async updatePasswordUser(
+    updatePasswordDto: UpdatePasswordDto,
+    userId: number,
+  ): Promise<UserEntity> {
     const user = await this.findUserById(userId);
 
-    const passwordHashed = await createPasswordHashed(updatePasswordDto.newPassword,);
+    const passwordHashed = await createPasswordHashed(
+      updatePasswordDto.newPassword,
+    );
 
-    const isMatch = await validatePassword(updatePasswordDto.lastPassword, user.password || '');
+    const isMatch = await validatePassword(
+      updatePasswordDto.lastPassword,
+      user.password || '',
+    );
 
-    if(!isMatch){
+    if (!isMatch) {
       throw new BadRequestException('Last password invalid');
     }
 

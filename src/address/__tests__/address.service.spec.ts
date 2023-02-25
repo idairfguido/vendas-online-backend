@@ -9,6 +9,8 @@ import { AddressService } from '../address.service';
 import { AddressEntity } from '../entities/address.entity';
 import { addressMock } from '../__mocks__/address.mock';
 import { createAddressMock } from '../__mocks__/create-address.mock';
+import { productMock } from '../../product/__mocks__/product.mock';
+import { returnDeleteAddressMock } from '../__mocks__/return-delete-address.mock';
 
 describe('AddressService', () => {
   let service: AddressService;
@@ -37,6 +39,7 @@ describe('AddressService', () => {
           useValue: {
             save: jest.fn().mockResolvedValue(addressMock),
             find: jest.fn().mockResolvedValue([addressMock]),
+            delete: jest.fn().mockResolvedValue(returnDeleteAddressMock),
           },
         },
       ],
@@ -93,6 +96,43 @@ describe('AddressService', () => {
 
     expect(
       service.findAddressByUserId(userEntityMock.id),
+    ).rejects.toThrowError();
+  });
+
+  it('should return Delete Result after delete product', async () => {
+    const deleteResult = await service.deleteAddress(
+      userEntityMock.id,
+      productMock.id,
+    );
+
+    expect(deleteResult).toEqual(returnDeleteAddressMock);
+  });
+
+  it('should return DeleteResult after delete product', async () => {
+    const deleteResult = await service.deleteAddress(
+      userEntityMock.id,
+      productMock.id,
+    );
+
+    expect(deleteResult).toEqual(returnDeleteAddressMock);
+  });
+
+  it('should return error in exception delete', async () => {
+    jest.spyOn(addressRepository, 'delete').mockRejectedValue(new Error());
+
+    expect(
+      service.deleteAddress(addressMock.id, userEntityMock.id),
+    ).rejects.toThrowError();
+  });
+
+  it('should return NotFoundException after delete product', async () => {
+    jest.spyOn(addressRepository, 'delete').mockResolvedValue({
+      raw: [],
+      affected: 0,
+    });
+
+    expect(
+      service.deleteAddress(addressMock.id, userEntityMock.id),
     ).rejects.toThrowError();
   });
 });

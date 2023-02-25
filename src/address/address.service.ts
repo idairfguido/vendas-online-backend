@@ -57,7 +57,7 @@ export class AddressService {
       id: addressId,
     });
 
-    if (result.affected < 1) {
+    if (result.affected === 0) {
       throw new NotFoundException(`Address not found for id: ${addressId}`);
     }
 

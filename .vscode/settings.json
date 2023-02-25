@@ -1,6 +1,6 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": false
+    "source.fixAll": true
   },
   "files.eol": "\n",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
