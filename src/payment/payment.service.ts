@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateOrderDto } from "src/order/dtos/create-order.dto";
-import { PaymentType } from "../payment-status/enums/payment-type.enum";
+import { CreateOrderDto } from "../order/dtos/create-order.dto";
 import { Repository } from "typeorm";
+import { PaymentType } from "../payment-status/enums/payment-type.enum";
 import { PaymentCreditCardEntity } from "./entities/payment-credit-card.entity";
 import { PaymentPixEntity } from "./entities/payment-pix.entity";
 import { PaymentEntity } from "./entities/payment.entity";
@@ -11,7 +11,7 @@ import { PaymentEntity } from "./entities/payment.entity";
 export class PaymentService {
   constructor(
     @InjectRepository(PaymentEntity)
-    private readonly paymentRepository: Repository<PaymentEntity>
+    private readonly paymentRepository: Repository<PaymentEntity>,
   ) { }
 
   async createPayment(createOrderDto: CreateOrderDto): Promise<PaymentEntity> {
