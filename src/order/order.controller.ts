@@ -14,13 +14,12 @@ import { OrderService } from "./order.service";
 export class OrderController {
   constructor(private readonly orderService: OrderService) { }
 
-  @Post("/cart/:cartId")
+  @Post()
   @UsePipes(ValidationPipe)
   async createOrder(
     @Body() createOrderDto: CreateOrderDto,
-    @Param("cartId") cartId: number,
     @UserId("userId") userId: number
   ) {
-    return this.orderService.createOrder(createOrderDto, cartId, userId);
+    return this.orderService.createOrder(createOrderDto, userId);
   }
 }
