@@ -5,7 +5,10 @@ import { UserEntity } from '../entities/user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { userEntityMock } from '../__mocks__/user.mock';
 import { createUserMock } from '../__mocks__/createUser.mock';
-import { updatePasswordInvalidMock, updatePasswordMock } from '../__mocks__/update-user.mock';
+import {
+  updatePasswordInvalidMock,
+  updatePasswordMock,
+} from '../__mocks__/update-user.mock';
 
 describe('UserService', () => {
   let service: UserService;

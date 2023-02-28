@@ -1,8 +1,8 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class createTableCart1675854227354 implements MigrationInterface {
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.query(`
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    queryRunner.query(`
             CREATE TABLE public.cart (
                 id integer NOT NULL,
                 user_id integer NOT NULL,
@@ -24,11 +24,11 @@ export class createTableCart1675854227354 implements MigrationInterface {
             
             ALTER TABLE ONLY public.cart ALTER COLUMN id SET DEFAULT nextval('public.cart_id_seq'::regclass);
         `);
-    }
+  }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.query(`
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    queryRunner.query(`
             drop table public.cart;
         `);
-    }
+  }
 }

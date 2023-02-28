@@ -59,4 +59,4 @@ import { OrderProductModule } from './order-product/order-product.module';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,10 +1,10 @@
-import { CreateOrderDto } from "../../order/dtos/create-order.dto";
-import { ChildEntity, Column } from "typeorm";
-import { PaymentEntity } from "./payment.entity";
+import { CreateOrderDto } from '../../order/dtos/create-order.dto';
+import { ChildEntity, Column } from 'typeorm';
+import { PaymentEntity } from './payment.entity';
 
 @ChildEntity()
 export class PaymentCreditCardEntity extends PaymentEntity {
-  @Column({ name: "amount_payments", nullable: false })
+  @Column({ name: 'amount_payments', nullable: false })
   amountPayments: number;
 
   constructor(
@@ -12,7 +12,7 @@ export class PaymentCreditCardEntity extends PaymentEntity {
     price: number,
     discount: number,
     finalPrice: number,
-    createOrderDto: CreateOrderDto
+    createOrderDto: CreateOrderDto,
   ) {
     super(statusId, price, discount, finalPrice);
     this.amountPayments = createOrderDto?.amountPayments || 0;

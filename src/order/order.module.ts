@@ -1,12 +1,12 @@
-import { Module } from "@nestjs/common";
-import { OrderService } from "./order.service";
-import { OrderController } from "./order.controller";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { OrderEntity } from "./entities/order.entity";
-import { CartModule } from "../cart/cart.module";
-import { OrderProductModule } from "../order-product/order-product.module";
-import { PaymentModule } from "../payment/payment.module";
-import { ProductModule } from "../product/product.module";
+import { Module } from '@nestjs/common';
+import { OrderService } from './order.service';
+import { OrderController } from './order.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { OrderEntity } from './entities/order.entity';
+import { CartModule } from '../cart/cart.module';
+import { OrderProductModule } from '../order-product/order-product.module';
+import { PaymentModule } from '../payment/payment.module';
+import { ProductModule } from '../product/product.module';
 
 @Module({
   imports: [
@@ -19,4 +19,4 @@ import { ProductModule } from "../product/product.module";
   providers: [OrderService],
   controllers: [OrderController],
 })
-export class OrderModule { }
+export class OrderModule {}

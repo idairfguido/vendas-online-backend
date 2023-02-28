@@ -1,8 +1,8 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { OrderController } from "../order.controller";
-import { OrderService } from "../order.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { OrderController } from '../order.controller';
+import { OrderService } from '../order.service';
 
-describe("OrderController", () => {
+describe('OrderController', () => {
   let controller: OrderController;
   let orderService: OrderService;
 
@@ -12,7 +12,7 @@ describe("OrderController", () => {
         {
           provide: OrderService,
           useValue: {
-            createOrder: "",
+            createOrder: '',
           },
         },
       ],
@@ -23,7 +23,7 @@ describe("OrderController", () => {
     orderService = module.get<OrderService>(OrderService);
   });
 
-  it("should be defined", () => {
+  it('should be defined', () => {
     expect(controller).toBeDefined();
     expect(orderService).toBeDefined();
   });

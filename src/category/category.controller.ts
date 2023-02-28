@@ -16,7 +16,7 @@ import { CategoryEntity } from './entities/category.entity';
 @Roles(UserType.Admin, UserType.User)
 @Controller('category')
 export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) { }
+  constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
   async findAllCategories(): Promise<ReturnCategoryDto[]> {

@@ -9,4 +9,4 @@ import { CartProductEntity } from './entities/cart-product.entity';
   providers: [CartProductService],
   exports: [CartProductService],
 })
-export class CartProductModule { }
+export class CartProductModule {}

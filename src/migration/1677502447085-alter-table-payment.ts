@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner } from "typeorm";
+import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class alterTablePayment1676323446877 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

@@ -74,7 +74,9 @@ describe('ProductService', () => {
   });
 
   it('should return error in exception before insert product in DB', async () => {
-    jest.spyOn(categoryService, 'findCategoryById').mockRejectedValue(new Error());
+    jest
+      .spyOn(categoryService, 'findCategoryById')
+      .mockRejectedValue(new Error());
 
     expect(service.createProduct(createProductMock)).rejects.toThrowError();
   });
@@ -113,5 +115,4 @@ describe('ProductService', () => {
       service.updateProduct(createProductMock, productMock.id),
     ).rejects.toThrowError();
   });
-  
 });

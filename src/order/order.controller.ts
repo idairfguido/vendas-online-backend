@@ -5,21 +5,21 @@ import {
   Post,
   UsePipes,
   ValidationPipe,
-} from "@nestjs/common";
-import { UserId } from "src/decorators/user-id.decorator";
-import { CreateOrderDto } from "./dtos/create-order.dto";
+} from '@nestjs/common';
+import { UserId } from '../decorators/user-id.decorator';
+import { CreateOrderDto } from './dtos/create-order.dto';
 import { OrderEntity } from './entities/order.entity';
-import { OrderService } from "./order.service";
+import { OrderService } from './order.service';
 
-@Controller("order")
+@Controller('order')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) { }
+  constructor(private readonly orderService: OrderService) {}
 
   @Post()
   @UsePipes(ValidationPipe)
   async createOrder(
     @Body() createOrderDto: CreateOrderDto,
-    @UserId("userId") userId: number
+    @UserId('userId') userId: number,
   ) {
     return this.orderService.createOrder(createOrderDto, userId);
   }

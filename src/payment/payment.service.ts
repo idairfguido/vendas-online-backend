@@ -1,21 +1,21 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { CreateOrderDto } from "../order/dtos/create-order.dto";
-import { Repository } from "typeorm";
-import { PaymentType } from "../payment-status/enums/payment-type.enum";
-import { PaymentCreditCardEntity } from "./entities/payment-credit-card.entity";
-import { PaymentPixEntity } from "./entities/payment-pix.entity";
-import { PaymentEntity } from "./entities/payment.entity";
-import { CartEntity } from "src/cart/entities/cart.entity";
-import { ProductEntity } from "src/product/entities/product.entity";
-import { CartProductEntity } from "src/cart-product/entities/cart-product.entity";
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateOrderDto } from '../order/dtos/create-order.dto';
+import { Repository } from 'typeorm';
+import { PaymentType } from '../payment-status/enums/payment-type.enum';
+import { PaymentCreditCardEntity } from './entities/payment-credit-card.entity';
+import { PaymentPixEntity } from './entities/payment-pix.entity';
+import { PaymentEntity } from './entities/payment.entity';
+import { CartEntity } from '../cart/entities/cart.entity';
+import { ProductEntity } from '../product/entities/product.entity';
+import { CartProductEntity } from '../cart-product/entities/cart-product.entity';
 
 @Injectable()
 export class PaymentService {
   constructor(
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
-  ) { }
+  ) {}
 
   generateFinalPrice(cart: CartEntity, products: ProductEntity[]) {
     if (!cart.cartProduct || cart.cartProduct.length === 0) {
@@ -64,7 +64,7 @@ export class PaymentService {
     }
 
     throw new BadRequestException(
-      "Amount Payments or code pix or date payment not found"
+      'Amount Payments or code pix or date payment not found',
     );
   }
 }

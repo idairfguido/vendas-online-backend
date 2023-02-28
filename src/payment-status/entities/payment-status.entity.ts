@@ -5,21 +5,21 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from "typeorm";
-import { PaymentEntity } from "../../payment/entities/payment.entity";
+} from 'typeorm';
+import { PaymentEntity } from '../../payment/entities/payment.entity';
 
-@Entity({ name: "payment_status" })
+@Entity({ name: 'payment_status' })
 export class PaymentStatusEntity {
-  @PrimaryGeneratedColumn("rowid")
+  @PrimaryGeneratedColumn('rowid')
   id: number;
 
-  @Column({ name: "name", nullable: false })
+  @Column({ name: 'name', nullable: false })
   name: string;
 
-  @CreateDateColumn({ name: "created_at" })
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: "updated_at" })
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   @OneToMany(() => PaymentEntity, (payment) => payment.paymentStatus)

@@ -13,7 +13,7 @@ export class ProductService {
     private readonly productRepository: Repository<ProductEntity>,
 
     private readonly categoryService: CategoryService,
-  ) { }
+  ) {}
 
   async findAll(productId?: number[]): Promise<ProductEntity[]> {
     let findOptions = {};
@@ -35,7 +35,9 @@ export class ProductService {
     return products;
   }
 
-  async createProduct(createProductDto: CreateProductDto): Promise<ProductEntity> {
+  async createProduct(
+    createProductDto: CreateProductDto,
+  ): Promise<ProductEntity> {
     await this.categoryService.findCategoryById(createProductDto.categoryId);
 
     return this.productRepository.save({
@@ -63,7 +65,10 @@ export class ProductService {
     return this.productRepository.delete({ id: productId });
   }
 
-  async updateProduct(updateProductDto: UpdateProductDto, productId: number): Promise<ProductEntity> {
+  async updateProduct(
+    updateProductDto: UpdateProductDto,
+    productId: number,
+  ): Promise<ProductEntity> {
     const product = await this.findProductById(productId);
 
     return this.productRepository.save({

@@ -1,12 +1,12 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { userEntityMock } from "../../user/__mocks__/user.mock";
-import { AddressController } from "../address.controller";
-import { AddressService } from "../address.service";
-import { addressMock } from "../__mocks__/address.mock";
-import { createAddressMock } from "../__mocks__/create-address.mock";
-import { returnDeleteAddressMock } from "../__mocks__/return-delete-address.mock";
+import { Test, TestingModule } from '@nestjs/testing';
+import { userEntityMock } from '../../user/__mocks__/user.mock';
+import { AddressController } from '../address.controller';
+import { AddressService } from '../address.service';
+import { addressMock } from '../__mocks__/address.mock';
+import { createAddressMock } from '../__mocks__/create-address.mock';
+import { returnDeleteAddressMock } from '../__mocks__/return-delete-address.mock';
 
-describe("AddressController", () => {
+describe('AddressController', () => {
   let controller: AddressController;
   let addressService: AddressService;
 
@@ -29,21 +29,21 @@ describe("AddressController", () => {
     addressService = module.get<AddressService>(AddressService);
   });
 
-  it("should be defined", () => {
+  it('should be defined', () => {
     expect(controller).toBeDefined();
     expect(addressService).toBeDefined();
   });
 
-  it("should address Entity in createAddress", async () => {
+  it('should address Entity in createAddress', async () => {
     const address = await controller.createAddress(
       createAddressMock,
-      userEntityMock.id
+      userEntityMock.id,
     );
 
     expect(address).toEqual(addressMock);
   });
 
-  it("should address Entity in findAddressByUserId", async () => {
+  it('should address Entity in findAddressByUserId', async () => {
     const addresses = await controller.findAddressByUserId(userEntityMock.id);
 
     expect(addresses).toEqual([
@@ -56,10 +56,10 @@ describe("AddressController", () => {
     ]);
   });
 
-  it("should address DeleteResult in deleteAddress", async () => {
+  it('should address DeleteResult in deleteAddress', async () => {
     const result = await controller.deleteAddress(
       userEntityMock.id,
-      addressMock.id
+      addressMock.id,
     );
 
     expect(result).toEqual(returnDeleteAddressMock);

@@ -11,4 +11,4 @@ import { CityModule } from '../city/city.module';
   controllers: [AddressController],
   providers: [AddressService],
 })
-export class AddressModule { }
+export class AddressModule {}

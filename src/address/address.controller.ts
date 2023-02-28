@@ -20,7 +20,7 @@ import { AddressEntity } from './entities/address.entity';
 @Roles(UserType.User, UserType.Admin)
 @Controller('address')
 export class AddressController {
-  constructor(private readonly addressService: AddressService) { }
+  constructor(private readonly addressService: AddressService) {}
 
   @Post()
   @UsePipes(ValidationPipe)

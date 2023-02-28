@@ -1,6 +1,6 @@
 import { DeleteResult } from 'typeorm';
 
 export const returnDeleteAddressMock: DeleteResult = {
-    raw: [],
-    affected: 1,
+  raw: [],
+  affected: 1,
 };
