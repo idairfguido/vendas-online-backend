@@ -13,14 +13,14 @@ import { OrderService } from './order.service';
 
 @Controller('order')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) { }
 
   @Post()
   @UsePipes(ValidationPipe)
   async createOrder(
     @Body() createOrderDto: CreateOrderDto,
     @UserId('userId') userId: number,
-  ) {
+  ): Promise<OrderEntity> {
     return this.orderService.createOrder(createOrderDto, userId);
   }
 
