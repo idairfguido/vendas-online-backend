@@ -19,7 +19,7 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @UsePipes(ValidationPipe)
   @Post()
@@ -28,7 +28,7 @@ export class UserController {
   }
 
   @Roles(UserType.Admin)
-  @Get()
+  @Get('/all')
   async getAllUsers(): Promise<ReturnUserDto[]> {
     return (await this.userService.getAllUsers()).map(
       (userEntity) => new ReturnUserDto(userEntity),
@@ -52,4 +52,13 @@ export class UserController {
   ): Promise<UserEntity> {
     return this.userService.updatePasswordUser(updatePasswordDto, userId);
   }
+
+  @Roles(UserType.Admin, UserType.User)
+  @Get()
+  async getInfoUser(@UserId() userId: number): Promise<ReturnUserDto> {
+    return new ReturnUserDto(
+      await this.userService.getUserByIdUsingRelations(userId),
+    );
+  }
+
 }
