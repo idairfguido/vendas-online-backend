@@ -16,7 +16,7 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  ) { }
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     const user = await this.findUserByEmail(createUserDto.email).catch(

@@ -10,7 +10,7 @@ import { AddressEntity } from '../entities/address.entity';
 import { addressMock } from '../__mocks__/address.mock';
 import { createAddressMock } from '../__mocks__/create-address.mock';
 import { productMock } from '../../product/__mocks__/product.mock';
-import { returnDeleteAddressMock } from '../__mocks__/return-delete-address.mock';
+import { returnDeleteMock } from '../../__mocks__/return-delete.mock';
 
 describe('AddressService', () => {
   let service: AddressService;
@@ -39,7 +39,7 @@ describe('AddressService', () => {
           useValue: {
             save: jest.fn().mockResolvedValue(addressMock),
             find: jest.fn().mockResolvedValue([addressMock]),
-            delete: jest.fn().mockResolvedValue(returnDeleteAddressMock),
+            delete: jest.fn().mockResolvedValue(returnDeleteMock),
           },
         },
       ],
@@ -105,7 +105,7 @@ describe('AddressService', () => {
       productMock.id,
     );
 
-    expect(deleteResult).toEqual(returnDeleteAddressMock);
+    expect(deleteResult).toEqual(returnDeleteMock);
   });
 
   it('should return DeleteResult after delete product', async () => {
@@ -114,7 +114,7 @@ describe('AddressService', () => {
       productMock.id,
     );
 
-    expect(deleteResult).toEqual(returnDeleteAddressMock);
+    expect(deleteResult).toEqual(returnDeleteMock);
   });
 
   it('should return error in exception delete', async () => {

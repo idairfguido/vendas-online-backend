@@ -4,7 +4,7 @@ import { AddressController } from '../address.controller';
 import { AddressService } from '../address.service';
 import { addressMock } from '../__mocks__/address.mock';
 import { createAddressMock } from '../__mocks__/create-address.mock';
-import { returnDeleteAddressMock } from '../__mocks__/return-delete-address.mock';
+import { returnDeleteMock } from '../../__mocks__/return-delete.mock';
 
 describe('AddressController', () => {
   let controller: AddressController;
@@ -18,7 +18,7 @@ describe('AddressController', () => {
           useValue: {
             createAddress: jest.fn().mockResolvedValue(addressMock),
             findAddressByUserId: jest.fn().mockResolvedValue([addressMock]),
-            deleteAddress: jest.fn().mockResolvedValue(returnDeleteAddressMock),
+            deleteAddress: jest.fn().mockResolvedValue(returnDeleteMock),
           },
         },
       ],
@@ -62,6 +62,6 @@ describe('AddressController', () => {
       addressMock.id,
     );
 
-    expect(result).toEqual(returnDeleteAddressMock);
+    expect(result).toEqual(returnDeleteMock);
   });
 });

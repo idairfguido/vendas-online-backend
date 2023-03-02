@@ -6,7 +6,7 @@ export class CacheService {
   constructor(
     @Inject(CACHE_MANAGER)
     private cacheManager: Cache,
-  ) {}
+  ) { }
 
   async getCache<T>(
     key: string,
