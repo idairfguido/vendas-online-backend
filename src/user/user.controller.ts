@@ -37,10 +37,13 @@ export class UserController {
 
   @Roles(UserType.Admin)
   @Get('/:userId')
-  async getUserById(@Param('userId') userId: number): Promise<ReturnUserDto> {
-    return new ReturnUserDto(
-      await this.userService.getUserByIdUsingRelations(userId),
-    );
+  async getUserById(@Param('userId') userId: number): Promise<ReturnUserDto | string> {
+
+    const userEntity: UserEntity | null = await this.userService.getUserByIdUsingRelations(userId);
+    if (userEntity) {
+      return new ReturnUserDto(userEntity);
+    }
+    return "User not found";
   }
 
   @Roles(UserType.Admin, UserType.User)
@@ -55,10 +58,12 @@ export class UserController {
 
   @Roles(UserType.Admin, UserType.User)
   @Get()
-  async getInfoUser(@UserId() userId: number): Promise<ReturnUserDto> {
-    return new ReturnUserDto(
-      await this.userService.getUserByIdUsingRelations(userId),
-    );
+  async getInfoUser(@UserId() userId: number): Promise<ReturnUserDto | string> {
+    const userEntity: UserEntity | null = await this.userService.getUserByIdUsingRelations(userId);
+    if (userEntity) {
+      return new ReturnUserDto(userEntity);
+    }
+    return "User not found";
   }
 
 }

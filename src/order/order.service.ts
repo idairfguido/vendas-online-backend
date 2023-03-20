@@ -21,7 +21,7 @@ export class OrderService {
     private readonly cartService: CartService,
     private readonly orderProductService: OrderProductService,
     private readonly productService: ProductService,
-  ) {}
+  ) { }
 
   async saveOrder(
     createOrderDto: CreateOrderDto,
@@ -50,7 +50,7 @@ export class OrderService {
             ?.price || 0,
           cartProduct.amount,
         ),
-      ),
+      ) || [],
     );
   }
   async createOrder(

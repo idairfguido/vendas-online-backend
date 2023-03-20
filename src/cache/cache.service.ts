@@ -10,15 +10,15 @@ export class CacheService {
 
   async getCache<T>(
     key: string,
-    functionRequest: () => Promise<T>,
-  ): Promise<T> {
-    const allData: T = await this.cacheManager.get('key');
+    functionRequest: () => Promise<any>,
+  ): Promise<any> {
+    const allData: any = await this.cacheManager.get(key);
 
     if (allData) {
       return allData;
     }
 
-    const cities: T = await functionRequest();
+    const cities: any = await functionRequest();
 
     await this.cacheManager.set(key, cities);
 
